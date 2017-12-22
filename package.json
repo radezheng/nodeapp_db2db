@@ -1,0 +1,15 @@
+{
+  "name": "nodeapp",
+  "version": "1.0.0",
+  "description": "node sample with azure sql",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://radez.visualstudio.com/_git/nodeapp"
+  },
+  "author": "Rade Zheng",
+  "license": "ISC"
+}
