@@ -8,10 +8,10 @@
   },
   "dependencies": {
     "body-parser": "^1.18.2",
-    "tedious": "^2.1.5",
     "express": "^4.10.8",
     "method-override": "^2.3.10",
-    "morgan": "^1.9.0"
+    "morgan": "^1.9.0",
+    "mysql2":"^1.5.2"
   },
   "devDependencies": {
     "gulp": "^3.9.0",

@@ -1,41 +1,48 @@
 //import { request } from 'http';
+var mysql = require("mysql2");
+var config =
+{
+    host: process.env.dbhost,
+    user: process.env.dbuser,
+    password: process.env.dbpassword,
+    database: 'db2db',
+    port: 3306,
+    ssl: true
+};
 
-var Connection = require('tedious').Connection;  
+const conn = new mysql.createConnection(config);
 
-var config = {  
-    userName: 'myadmin',  
-    password: 'Azurep@ssw0rd',  
-    server: 'demoserver4rade.database.windows.net',  
-    // If you are on Microsoft Azure, you need this:  
-    options: {encrypt: true, database: 'mydemodb', rowCollectionOnRequestCompletion:true}  
-};  
-var Request = require('tedious').Request;  
-var TYPES = require('tedious').TYPES;  
-
-var connection = new Connection(config);  
-connection.on('connect', function(err) {  
-    if(err){
-        console.log(err);
-    } else{
-        console.log("DB Connected");  
+conn.connect(
+    function (err) { 
+    if (err) { 
+        console.log(process.env.dbhost, "!!! Cannot connect !!! Error:");
+        throw err;
     }
-});  
+    else
+    {
+       console.log("Connection established.");
+         //  queryDatabase();
+    }   
+});
+
+
 function getTodos(res) {
-    request = new Request("SELECT * from tblTodo for json path", function(err,rowcount, rows) {  
-        if (err) {  
-            console.log(err);
-        }else{
-            
-            if(rowcount > 0){
-                console.log('return:' , rowcount, rows[0][0].value);
-                res.send(rows[0][0].value);
-            }else{
-                res.send([]);
+    conn.query('SELECT * FROM tblTodo', 
+        function (err, results, fields) {
+            if (err) {
+                console.log(err);
             }
-        }
-    });  
-        
-        connection.execSql(request); 
+            else {
+            console.log('Selected ' + results.length + ' row(s).');
+            res.send(JSON.stringify(results));
+            /*
+            for (i = 0; i < results.length; i++) {
+                console.log('Row: ' + JSON.stringify(results[i]));
+            }
+            */
+            console.log('Done.');
+            }
+        })
 };
 
 module.exports = function (app) {
