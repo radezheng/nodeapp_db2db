@@ -38,14 +38,14 @@
 
 		<!-- TODO LIST -->
 		<div id="todo-list" class="row">
-			<div class="col-sm-4 col-sm-offset-4">
+			<div class=" col-sm-offset-4">
 
 				
 
 				<!-- LOOP OVER THE TODOS IN $scope.todos -->
 				<div class="checkbox" ng-repeat="todo in todos">
 					<label>
-						<input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.item }}
+						<input type="checkbox" ng-click="deleteTodo(todo.id)"> {{ todo.item }} - {{ todo.id }} - {{ todo.updatedtime }}  
 					</label>
 				</div>
 
