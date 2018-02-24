@@ -1,7 +1,7 @@
 angular.module('todoController', [])
 
 	// inject the Todo service factory into our controller
-	.controller('mainController', ['$scope','$http','Todos', function($scope, $http, Todos) {
+	.controller('mainController', ['$scope','$http','Todos', function($scope, $http, Todos,Env) {
 		$scope.formData = {};
 		$scope.loading = true;
 
@@ -13,7 +13,11 @@ angular.module('todoController', [])
 				$scope.todos = data;
 				$scope.loading = false;
 			});
-
+		
+		Todos.getenv()
+			.success(function(env){
+				$scope.env = env
+			});
 		// CREATE ==================================================================
 		// when submitting the add form, send the text to the node API
 		$scope.createTodo = function() {

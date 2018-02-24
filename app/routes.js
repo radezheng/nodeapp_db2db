@@ -134,6 +134,10 @@ module.exports = function (app) {
         getTodos(res);
     });
 
+    app.get('/api/env', function (req, res) {
+        // use mongoose to get all todos in the database
+       res.send({group:process.env.GROUPID, dbhost:process.env.dbhost});
+    });
     // create todo and send back all todos after creation
     app.post('/api/todos', function (req, res) {
         var eventBody = {}

@@ -33,7 +33,7 @@
 
 		<!-- HEADER AND TODO COUNT -->
 		<div class="jumbotron text-center">
-			<h1>I'm a Todo App Demo for Huawei <span class="label label-info">{{ todos.length }}</span></h1>
+			<h1>Todo App Demo for {{env.group}} <span class="label label-info">{{ todos.length }}</span></h1>
 		</div>
 
 		<!-- TODO LIST -->
@@ -73,9 +73,11 @@
 		</div>
 
 		<div class="text-center text-muted">
+			{{env.dbhost}}
 			<p>A demo by Rade.</p>
-			<p>参考
-				 <a href="http://scotch.io/tutorials/javascript/creating-a-single-page-todo-app-with-node-and-angular">tutorial</a>.</p>
+			<!--p>参考
+				 <a href="http://scotch.io/tutorials/javascript/creating-a-single-page-todo-app-with-node-and-angular">tutorial</a>.
+			</p-->
 		</div>
 
 	</div>
