@@ -88,19 +88,6 @@ client.open()
     console.error(err.message);
   };
 
-// conn.connect(
-//     function (err) { 
-//     if (err) { 
-//         console.log(process.env.dbhost, "!!! Cannot connect !!! Error:");
-//         throw err;
-//     }
-//     else
-//     {
-//        console.log("Connection established.");
-//          //  queryDatabase();
-//     }   
-// });
-
 var MyGroup = process.env.GROUPID;
 
 function getTodos(res) {
