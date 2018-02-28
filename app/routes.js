@@ -69,15 +69,20 @@ var client = EventHubClient.fromConnectionString(connectionString, eventHubPath)
 var sendEvent = function (eventBody) {
         msg = eventBody;
         console.log('Sending Event: ' + msg);
+        try{
         client.createSender()
         .then(function(sender){
             sender.send(msg);
         });
+        }catch(err){
+            connectHub();
+            sendEvent(eventBody);
+        }
            //client.close();
   
 };
 
-
+function connectHub(){
 client.open()
 .then(function() {
     sender = client.createSender();
@@ -87,7 +92,9 @@ client.open()
   var printError = function (err) {
     console.error(err.message);
   };
+}
 
+connectHub
 var MyGroup = process.env.GROUPID;
 
 function getTodos(res) {
