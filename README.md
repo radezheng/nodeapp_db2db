@@ -27,7 +27,7 @@ CREATE TABLE `tbltodo` (
 ```Bash
 git clone https://github.com/radezheng/nodeapp_db2db
 git remote add weba <your web app git url>
-git push weba master
+git push weba 
 ```
 
 详细参考：<br>
