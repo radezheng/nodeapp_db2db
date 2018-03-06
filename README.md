@@ -1,20 +1,35 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+这是一个可以部署在Azure WebApp的前端应用，也可以独立部署，用的Angular 前端 + NodeJS。主要功能是通过一个简单的代办应用，演示如何近实时的同步部署在Azure和其他地方的应用的数据库。
 
 # Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+以在Azure部署两个一样的应用为示例，跨云/地到云原理一样。
+1.	创建两个mysql PaaS数据库，如mysqla和mysqlb, 创建一张表:
+CREATE TABLE `tbltodo` (
+  `id` varchar(50) NOT NULL,
+  `item` varchar(45) NOT NULL,
+  `status` varchar(45) DEFAULT NULL,
+  `updatedtime` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+2. 创建一个Event Hub，如db2dbhub，创建一个hub实例，如hub01, 并在hub01里创建两个Consumer Group, 如groupa和groupb. 获取其连接串。
+
+3.	创建两个Web App, 如webgroupa和webgroupb, 创建部署为local git. 或使用VSTS. 按需要配置webapp的应用程序设置, 两个webapp对应自己的配置，如对应A的:
+dbhost : mysqla.mysql.database.azure.com
+dbuser : youradmin@yourmysqla
+dbpassword : yourpassword
+GROUPID : A
+hubconn : <your event hub connection string>
+ConsumerGroup : groupa
+
+4.	部署webapp的代码，手动部署到weba示例, 过程需要输入部署用户的id和password：
+git clone https://github.com/radezheng/nodeapp_db2db
+git remote add weba <your web app git url>
+git push weba master
+
+详细参考：https://code.visualstudio.com/tutorials/nodejs-deployment/deploy-website
+
+5.	至此，webapp应该可以访问。并能工作，只是还不能同步。同步需要部署webjob，y请参见webjob的Readme
 
 # Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
-
-If you want to learn more about creating good readme files then refer the following [guidelines](https://www.visualstudio.com/en-us/docs/git/create-a-readme). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+详细架构请参见PPT描述
