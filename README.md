@@ -4,6 +4,7 @@
 # Getting Started
 以在Azure部署两个一样的应用为示例，跨云/地到云原理一样。
 1.	创建两个mysql PaaS数据库，如mysqla和mysqlb, 创建一张表:
+```SQL
 CREATE TABLE `tbltodo` (
   `id` varchar(50) NOT NULL,
   `item` varchar(45) NOT NULL,
@@ -11,7 +12,7 @@ CREATE TABLE `tbltodo` (
   `updatedtime` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+```
 2. 创建一个Event Hub，如db2dbhub，创建一个hub实例，如hub01, 并在hub01里创建两个Consumer Group, 如groupa和groupb. 获取其连接串。
 
 3.	创建两个Web App, 如webgroupa和webgroupb, 创建部署为local git. 或使用VSTS. 按需要配置webapp的应用程序设置, 两个webapp对应自己的配置，如对应A的: <br>
@@ -27,6 +28,7 @@ CREATE TABLE `tbltodo` (
 git clone https://github.com/radezheng/nodeapp_db2db
 git remote add weba <your web app git url>
 git push weba master
+```
 
 详细参考：<br>
 https://code.visualstudio.com/tutorials/nodejs-deployment/deploy-website
